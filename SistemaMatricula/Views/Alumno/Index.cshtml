@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Alumnos</h2>
+<link href="~/Content/datatables.css" rel="stylesheet" />
+<div style="margin-bottom: 10px">
+    <select id="cboSexo" class="form-control" style="display: inline-block"  >
+    </select>
+    <input type="button" name="btnBuscar" value="Buscar" id="btnBuscar" class="btn btn-success"/>
+    <input type="button" name="btnLimpiar" value="Restablecer" id="btnLimpiar" class="btn btn-primary" />
+</div>
+
+<div id="tablaAlumno">
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/Alumno.js"></script>
+
+@section scripts{
+<script src="~/Scripts/datatables.min.js"></script>
+    }
+

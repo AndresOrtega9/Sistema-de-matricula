@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SistemaMatriculaModelStoreContainer" CdmEntityContainer="SistemaMatriculaEntities">
+    <EntitySetMapping Name="Alumno">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Alumno">
+        <MappingFragment StoreEntitySet="Alumno">
+          <ScalarProperty Name="IIDALUMNO" ColumnName="IIDALUMNO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APPATERNO" ColumnName="APPATERNO" />
+          <ScalarProperty Name="APMATERNO" ColumnName="APMATERNO" />
+          <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
+          <ScalarProperty Name="IIDSEXO" ColumnName="IIDSEXO" />
+          <ScalarProperty Name="TELEFONOPADRE" ColumnName="TELEFONOPADRE" />
+          <ScalarProperty Name="TELEFONOMADRE" ColumnName="TELEFONOMADRE" />
+          <ScalarProperty Name="NUMEROHERMANOS" ColumnName="NUMEROHERMANOS" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+          <ScalarProperty Name="IIDTIPOUSUARIO" ColumnName="IIDTIPOUSUARIO" />
+          <ScalarProperty Name="bTieneUsuario" ColumnName="bTieneUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Aula">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Aula">
+        <MappingFragment StoreEntitySet="Aula">
+          <ScalarProperty Name="IIDAULA" ColumnName="IIDAULA" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Curso">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Curso">
+        <MappingFragment StoreEntitySet="Curso">
+          <ScalarProperty Name="IIDCURSO" ColumnName="IIDCURSO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleMatricula">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.DetalleMatricula">
+        <MappingFragment StoreEntitySet="DetalleMatricula">
+          <ScalarProperty Name="IIDMATRICULA" ColumnName="IIDMATRICULA" />
+          <ScalarProperty Name="IIDCURSO" ColumnName="IIDCURSO" />
+          <ScalarProperty Name="NOTA1" ColumnName="NOTA1" />
+          <ScalarProperty Name="NOTA2" ColumnName="NOTA2" />
+          <ScalarProperty Name="NOTA3" ColumnName="NOTA3" />
+          <ScalarProperty Name="NOTA4" ColumnName="NOTA4" />
+          <ScalarProperty Name="PROMEDIO" ColumnName="PROMEDIO" />
+          <ScalarProperty Name="bhabilitado" ColumnName="bhabilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Docente">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Docente">
+        <MappingFragment StoreEntitySet="Docente">
+          <ScalarProperty Name="IIDDOCENTE" ColumnName="IIDDOCENTE" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="APPATERNO" ColumnName="APPATERNO" />
+          <ScalarProperty Name="APMATERNO" ColumnName="APMATERNO" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="TELEFONOCELULAR" ColumnName="TELEFONOCELULAR" />
+          <ScalarProperty Name="TELEFONOFIJO" ColumnName="TELEFONOFIJO" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="IIDSEXO" ColumnName="IIDSEXO" />
+          <ScalarProperty Name="FECHACONTRATO" ColumnName="FECHACONTRATO" />
+          <ScalarProperty Name="FOTO" ColumnName="FOTO" />
+          <ScalarProperty Name="IIDMODALIDADCONTRATO" ColumnName="IIDMODALIDADCONTRATO" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+          <ScalarProperty Name="IIDTIPOUSUARIO" ColumnName="IIDTIPOUSUARIO" />
+          <ScalarProperty Name="bTieneUsuario" ColumnName="bTieneUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocentePeriodo">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.DocentePeriodo">
+        <MappingFragment StoreEntitySet="DocentePeriodo">
+          <ScalarProperty Name="IIDDOCENTE" ColumnName="IIDDOCENTE" />
+          <ScalarProperty Name="IIDPERIODO" ColumnName="IIDPERIODO" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grado">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Grado">
+        <MappingFragment StoreEntitySet="Grado">
+          <ScalarProperty Name="IIDGRADO" ColumnName="IIDGRADO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GradoSeccion">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.GradoSeccion">
+        <MappingFragment StoreEntitySet="GradoSeccion">
+          <ScalarProperty Name="IID" ColumnName="IID" />
+          <ScalarProperty Name="IIDGRADO" ColumnName="IIDGRADO" />
+          <ScalarProperty Name="IIDSECCION" ColumnName="IIDSECCION" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GradoSeccionAula">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.GradoSeccionAula">
+        <MappingFragment StoreEntitySet="GradoSeccionAula">
+          <ScalarProperty Name="IID" ColumnName="IID" />
+          <ScalarProperty Name="IIDPERIODO" ColumnName="IIDPERIODO" />
+          <ScalarProperty Name="IIDGRADOSECCION" ColumnName="IIDGRADOSECCION" />
+          <ScalarProperty Name="IIDAULA" ColumnName="IIDAULA" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+          <ScalarProperty Name="IIDDOCENTE" ColumnName="IIDDOCENTE" />
+          <ScalarProperty Name="IIDCURSO" ColumnName="IIDCURSO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Matricula">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Matricula">
+        <MappingFragment StoreEntitySet="Matricula">
+          <ScalarProperty Name="IIDMATRICULA" ColumnName="IIDMATRICULA" />
+          <ScalarProperty Name="IIDPERIODO" ColumnName="IIDPERIODO" />
+          <ScalarProperty Name="IIDGRADO" ColumnName="IIDGRADO" />
+          <ScalarProperty Name="IIDSECCION" ColumnName="IIDSECCION" />
+          <ScalarProperty Name="IIDALUMNO" ColumnName="IIDALUMNO" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModalidadContrato">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.ModalidadContrato">
+        <MappingFragment StoreEntitySet="ModalidadContrato">
+          <ScalarProperty Name="IIDMODALIDADCONTRATO" ColumnName="IIDMODALIDADCONTRATO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pagina">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Pagina">
+        <MappingFragment StoreEntitySet="Pagina">
+          <ScalarProperty Name="IIDPAGINA" ColumnName="IIDPAGINA" />
+          <ScalarProperty Name="MENSAJE" ColumnName="MENSAJE" />
+          <ScalarProperty Name="ACCION" ColumnName="ACCION" />
+          <ScalarProperty Name="CONTROLADOR" ColumnName="CONTROLADOR" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Periodo">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Periodo">
+        <MappingFragment StoreEntitySet="Periodo">
+          <ScalarProperty Name="IIDPERIODO" ColumnName="IIDPERIODO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="FECHAINICIO" ColumnName="FECHAINICIO" />
+          <ScalarProperty Name="FECHAFIN" ColumnName="FECHAFIN" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PeriodoGradoCurso">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.PeriodoGradoCurso">
+        <MappingFragment StoreEntitySet="PeriodoGradoCurso">
+          <ScalarProperty Name="IID" ColumnName="IID" />
+          <ScalarProperty Name="IIDPERIODO" ColumnName="IIDPERIODO" />
+          <ScalarProperty Name="IIDGRADO" ColumnName="IIDGRADO" />
+          <ScalarProperty Name="IIDCURSO" ColumnName="IIDCURSO" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rol">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Rol">
+        <MappingFragment StoreEntitySet="Rol">
+          <ScalarProperty Name="IIDROL" ColumnName="IIDROL" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RolPagina">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.RolPagina">
+        <MappingFragment StoreEntitySet="RolPagina">
+          <ScalarProperty Name="IIDROL" ColumnName="IIDROL" />
+          <ScalarProperty Name="IIDPAGINA" ColumnName="IIDPAGINA" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seccion">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Seccion">
+        <MappingFragment StoreEntitySet="Seccion">
+          <ScalarProperty Name="IIDSECCION" ColumnName="IIDSECCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sexo">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Sexo">
+        <MappingFragment StoreEntitySet="Sexo">
+          <ScalarProperty Name="IIDSEXO" ColumnName="IIDSEXO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOUSUARIO">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.TIPOUSUARIO">
+        <MappingFragment StoreEntitySet="TIPOUSUARIO">
+          <ScalarProperty Name="IIDTIPOUSUARIO" ColumnName="IIDTIPOUSUARIO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="SistemaMatriculaModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="IIDUSUARIO" ColumnName="IIDUSUARIO" />
+          <ScalarProperty Name="NOMBREUSUARIO" ColumnName="NOMBREUSUARIO" />
+          <ScalarProperty Name="CONTRA" ColumnName="CONTRA" />
+          <ScalarProperty Name="TIPOUSUARIO" ColumnName="TIPOUSUARIO" />
+          <ScalarProperty Name="IID" ColumnName="IID" />
+          <ScalarProperty Name="IIDROL" ColumnName="IIDROL" />
+          <ScalarProperty Name="BHABILITADO" ColumnName="BHABILITADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
