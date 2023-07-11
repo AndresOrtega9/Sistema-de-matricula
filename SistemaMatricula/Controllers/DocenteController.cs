@@ -46,7 +46,7 @@ namespace SistemaMatricula.Controllers
         {
             SistemaMatriculaEntities db = new SistemaMatriculaEntities();
             var lista = (from docente in db.Docente
-                         where docente.IIDMODALIDADCONTRATO == 1
+                         where docente.IIDMODALIDADCONTRATO == idModalidad
                          select new
                          {
                              docente.IIDDOCENTE,
