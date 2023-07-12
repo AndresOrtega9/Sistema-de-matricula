@@ -1,6 +1,33 @@
-﻿$.get("Docente/LlenarComboModalidadContrato", function (data) {
+﻿$("#datepicker").datepicker(
+    {
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear: true
+    }
+);
+$.get("Docente/LlenarComboModalidadContrato", function (data) {
     LlenarCombo(data, document.getElementById("modalidadContrato"), true)
+    LlenarCombo(data, document.getElementById("cboModalidadPopUp"),true)
 });
+
+$.get("Docente/ObtenerListaSexo", function (data) {
+    LlenarComboSexo(data, document.getElementById("cboSexoPopUp"), true)
+});
+
+function LlenarComboSexo(data, control, primerElemento) {
+    var contenido = "";
+    if (primerElemento == true) {
+        contenido += "<option value=''>--Seleccione--</option>";
+    }
+    var cantidadDeElemntos = data.length;
+    for (var i = 0; i < cantidadDeElemntos; i++) {
+
+        contenido += "<option value='" + data[i].IIDSEXO + "'>";
+        contenido += data[i].NOMBRE;
+        contenido += "</option>";
+    }
+    control.innerHTML = contenido;
+};
 
 function LlenarCombo(data, control, primerElemento) {
     var contenido = "";
@@ -47,16 +74,22 @@ function ListarDocentes(data) {
     contenido += "<td>PRIMER APELLIDO</td>";
     contenido += "<td>SEGUNDO APELLIDO</td>";
     contenido += "<td>EMAIL</td>";
+    contenido += "<td>OPCIONES</td>";
     contenido += "</tr>";
     contenido += "</thead>";
     var cantidadDeElmentos = data.length;
     contenido += "<tbody>";
     for (var i = 0; i < cantidadDeElmentos; i++) {
         contenido += "<tr>";
+        contenido += "<td>" + data[i].IIDDOCENTE + "</td>";
         contenido += "<td>" + data[i].NOMBRE + "</td>";
         contenido += "<td>" + data[i].APPATERNO + "</td>";
         contenido += "<td>" + data[i].APMATERNO + "</td>";
         contenido += "<td>" + data[i].EMAIL + "</td>";
+        contenido += "<td>";
+        contenido += "<button data-bs-toggle='modal' data-bs-target='#myModal' class='btn btn-warning'><i class='glyphicon glyphicon-edit'></i></button> "
+        contenido += "<button class='btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"
+        contenido += "</td>";
         contenido += "</tr>";
     }
     contenido += "</tbody>";

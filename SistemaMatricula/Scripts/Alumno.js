@@ -1,5 +1,13 @@
-﻿$.get("Alumno/LlenarComboBoxSexo", function (data) {
-    LlenarCombo(data, document.getElementById("cboSexo"),true)
+﻿$("#datepicker").datepicker(
+    {
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear: true
+    }
+);
+$.get("Alumno/LlenarComboBoxSexo", function (data) {
+    LlenarCombo(data, document.getElementById("cboSexo"), true)
+    LlenarCombo(data, document.getElementById("cboSexoPopUp"), true)
 });
 
 function LlenarCombo(data, control, primerElemento) {
@@ -51,6 +59,7 @@ function ListarAlumnos(data) {
     contenido += "<td>NOMBRE</td>";
     contenido += "<td>PRIMER APELLIDO</td>";
     contenido += "<td>SEGUNDO APELLIDO</td>";
+    contenido += "<td>OPCIONES</td>";
     contenido += "</tr>";
     contenido += "</thead>";
     var cantidadDeElmentos = data.length;
@@ -61,6 +70,10 @@ function ListarAlumnos(data) {
         contenido += "<td>" + data[i].NOMBRE + "</td>";
         contenido += "<td>" + data[i].APPATERNO + "</td>";
         contenido += "<td>" + data[i].APMATERNO + "</td>";
+        contenido += "<td>";
+        contenido += "<button data-bs-toggle='modal' data-bs-target='#myModal' class='btn btn-warning'><i class='glyphicon glyphicon-edit'></i></button> "
+        contenido += "<button class='btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"
+        contenido += "</td>";
         contenido += "</tr>";
     }
     contenido += "</tbody>";

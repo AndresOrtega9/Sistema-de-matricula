@@ -1,4 +1,18 @@
-﻿ObtenerPeriodos();
+﻿$("#datepickerInicio").datepicker(
+    {
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear:true
+    }
+);
+$("#datepickerFin").datepicker(
+    {
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear:true
+    }
+);
+ObtenerPeriodos();
 function ObtenerPeriodos() {
     $.get("Periodo/ObtenerPeriodos", function (data) {
         ListaDePeriodos(data);
@@ -37,7 +51,7 @@ function ListaDePeriodos(data) {
         contenido += "<td>" + data[i].FECHAINICIO + "</td>";
         contenido += "<td>" + data[i].FECHAFIN + "</td>";
         contenido += "<td>";
-        contenido += "<button class='btn btn-primary'><i class='glyphicon glyphicon-edit'></i></button> "
+        contenido += "<button data-bs-toggle='modal' data-bs-target='#myModal' class='btn btn-warning'><i class='glyphicon glyphicon-edit'></i></button> "
         contenido += "<button class='btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"
         contenido += "</td>";
         contenido += "</tr>";
@@ -48,7 +62,7 @@ function ListaDePeriodos(data) {
     document.getElementById("tabla").innerHTML = contenido;
     $("#tablaPeriodo").dataTable(
         {
-            searching:false
+            searching: false
         }
     );
 }

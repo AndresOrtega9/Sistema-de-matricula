@@ -58,5 +58,18 @@ namespace SistemaMatricula.Controllers
 
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ObtenerListaSexo()
+        {
+            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+            var lista = (from sexo in db.Sexo
+                         where sexo.IIDSEXO != 0
+                         select new
+                         {
+                             sexo.IIDSEXO,
+                             sexo.NOMBRE
+                         }).ToList();
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
     }
 }

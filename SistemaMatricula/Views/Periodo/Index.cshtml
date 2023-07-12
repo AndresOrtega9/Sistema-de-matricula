@@ -3,16 +3,64 @@
     ViewBag.Title = "Index";
 }
 <link href="~/Content/datatables.css" rel="stylesheet" />
-<h2>Periodo</h2>
+<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+<h2>Periodo académico</h2>
 <hr />
-<label>Buscar periodo por nombre</label>
+<label>Buscar periodo académico por nombre</label>
 <input type="text" id="txtNombre" />
+<br />
+<!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Agregar</button>
 <div id="tabla">
 </div>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/Periodo.js"></script>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Crear nuevo registro</h4>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table style="width:80%; margin:auto">
+                    <tr>
+                        <td width="40%">Id periodo</td>
+                        <td width="60%"><input type="text" id="txtIdPeriodo" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Nombre de periodo</td>
+                        <td width="60%"><input type="text" id="txtNombrePeriodo" /></td>
+                    </tr>
+                    <tr >
+                        <td width="40%">Fecha inicio</td>
+                        <td width="60%"><input type="text" id="datepickerInicio" /></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">Fecha fin</td>
+                        <td width="60%"><input type="text" id="datepickerFin"/></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="btnAceptar" type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
+                <button id="btnCancelar" type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/Periodo.js"></script>
     <script src="~/Scripts/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 }
 

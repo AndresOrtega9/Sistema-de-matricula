@@ -49,5 +49,23 @@ namespace SistemaMatricula.Controllers
 
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
+
+        public int Guardar(Curso curso)
+        {
+            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+
+            int numeroDeRegistrosAfectados = 0;
+
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+            return numeroDeRegistrosAfectados;
+        }
     }
 }

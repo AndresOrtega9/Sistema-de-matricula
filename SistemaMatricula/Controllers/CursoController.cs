@@ -25,6 +25,20 @@ namespace SistemaMatricula.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult RecuperarDatos(int id)
+        {
+            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+            var lista = (from curso in db.Curso
+                         where curso.BHABILITADO == 1 && curso.IIDCURSO == id
+                         select new
+                         {
+                             curso.IIDCURSO,
+                             curso.NOMBRE,
+                             curso.DESCRIPCION
+                         }).ToList();
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult ObtenerCursoPorNombre(string nombre)
         {
             SistemaMatriculaEntities db = new SistemaMatriculaEntities();

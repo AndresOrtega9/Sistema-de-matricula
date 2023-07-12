@@ -3,15 +3,96 @@
     ViewBag.Title = "Index";
 }
 <link href="~/Content/datatables.css" rel="stylesheet" />
+<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
 <h2>Docentes</h2>
 <hr />
 <label>Ingrese modalidad de contrato</label>
 <select id="modalidadContrato">
 </select>
+<br />
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Crear</button>
 <div id="tablaDocente">
 </div>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/Docente.js"></script>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Crear nuevo registro</h4>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table style="width:80%;margin:auto">
+                    <tr>
+                        <td width="40%"><label>Id Docente</label></td>
+                        <td width="60%"><input type="text" id="txtIdDocente" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><label>Nombre del docente</label></td>
+                        <td width="60%"><input type="text" id="txtNombreDocente"/></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><label>Primer apellido</label></td>
+                        <td width="60%"><input type="text" id="txtPrimerApellido"/></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><label>Segundo apellido</label></td>
+                        <td width="60%"><input type="text" id="txtSegundoApellido"/></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><label>Dirección</label></td>
+                        <td width="60%"><input type="text" id="txtDireccion" /></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><label>Número de telefono</label></td>
+                        <td width="60%"><input type="number" id="txtNumeroTelefono"/></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><label>Número de celular</label></td>
+                        <td width="60%"><input type="number"/></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><label>Correo electronico</label></td>
+                        <td width="60%"><input type="email" id="txtCorreo"/></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><label>Sexo</label></td>
+                        <td width="60%"><select id="cboSexoPopUp"></select></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><label>Fecha de ingreso</label></td>
+                        <td width="60%"><input type="text" id="datepicker"/></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><label>Modo de contrato</label></td>
+                        <td width="60%"><select id="cboModalidadPopUp"></select></td>
+                    </tr>
+                    <tr>
+                        <td><label>Cargar foto</label></td>
+                        <td><img id="imgFoto" width="150" height="100" style="border:1px solid"/></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 @section Scripts{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/Docente.js"></script>
     <script src="~/Scripts/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 }
