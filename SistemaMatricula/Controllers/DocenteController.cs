@@ -19,7 +19,7 @@ namespace SistemaMatricula.Controllers
         public JsonResult ObtenerDocentes()
         {
 
-            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+            ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
             var lista = (from docente in db.Docente
                          select new
                          {
@@ -35,7 +35,7 @@ namespace SistemaMatricula.Controllers
 
         public JsonResult LlenarComboModalidadContrato()
         {
-            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+            ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
             var lista = db.ModalidadContrato.Where(o =>o.BHABILITADO==1)
                 .Select(o => new { o.IIDMODALIDADCONTRATO, o.NOMBRE }).ToList();
 
@@ -44,7 +44,7 @@ namespace SistemaMatricula.Controllers
 
         public JsonResult FiltrarDocentePorTipoModalidad(int idModalidad)
         {
-            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+            ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
             var lista = (from docente in db.Docente
                          where docente.IIDMODALIDADCONTRATO == idModalidad
                          select new
@@ -61,7 +61,7 @@ namespace SistemaMatricula.Controllers
 
         public JsonResult ObtenerListaSexo()
         {
-            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+            ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
             var lista = (from sexo in db.Sexo
                          where sexo.IIDSEXO != 0
                          select new

@@ -17,7 +17,7 @@ namespace SistemaMatricula.Controllers
 
         public JsonResult ObtenerListadoSeccion()
         {
-            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+            ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
             var lista = (from seccion in db.Seccion
                          where seccion.BHABILITADO == 1
                          select new

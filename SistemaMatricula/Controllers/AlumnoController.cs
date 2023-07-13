@@ -17,7 +17,7 @@ namespace SistemaMatricula.Controllers
 
         public JsonResult ObtenerAlumnos()
         {
-            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+            ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
 
             var lista = db.Alumno.Where(o => o.BHABILITADO == 1)
                 .Select(o => new { o.IIDALUMNO, o.NOMBRE, o.APPATERNO, o.APMATERNO }).ToList();
@@ -28,7 +28,7 @@ namespace SistemaMatricula.Controllers
 
         public JsonResult LlenarComboBoxSexo()
         {
-            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+            ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
 
             var lista = db.Sexo.Where(o => o.BHABILITADO == 1)
                 .Select(o => new {ID=o.IIDSEXO,o.NOMBRE}).ToList();
@@ -38,7 +38,7 @@ namespace SistemaMatricula.Controllers
 
         public JsonResult BuscarAlumnoPorSexo(int IdSexo)
         {
-            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
+            ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
             var lista = db.Alumno.Where(o => o.BHABILITADO == 1 && o.IIDSEXO == IdSexo)
                 .Select(o => new {
                     o.IIDALUMNO,
@@ -48,24 +48,6 @@ namespace SistemaMatricula.Controllers
                 }).ToList();
 
             return Json(lista, JsonRequestBehavior.AllowGet);
-        }
-
-        public int Guardar(Curso curso)
-        {
-            SistemaMatriculaEntities db = new SistemaMatriculaEntities();
-
-            int numeroDeRegistrosAfectados = 0;
-
-            try
-            {
-
-            }
-            catch(Exception ex)
-            {
-
-            }
-
-            return numeroDeRegistrosAfectados;
         }
     }
 }

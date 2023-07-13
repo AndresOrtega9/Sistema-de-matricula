@@ -1,27 +1,18 @@
 ﻿ObtenerCursos();
 function ObtenerCursos() {
-
     $.get("Curso/ObtenerCursos", function (data) {
-
         lista(data);
     });
 }
-
-
 
 var btnBuscarCursoPorNombre = document.getElementById("btnBuscar");
 btnBuscarCursoPorNombre.onclick = function () {
 
     var nombreCurso = document.getElementById("txtNombre").value;
-
     $.get("Curso/ObtenerCursoPorNombre/?nombre=" + nombreCurso, function (data) {
-
-
         lista(data);
-
     });
 }
-
 function lista(data) {
 
     var contenido = "";
@@ -42,8 +33,9 @@ function lista(data) {
         contenido += "<td>" + data[i].NOMBRE + "</td>";
         contenido += "<td>" + data[i].DESCRIPCION + "</td>";
         contenido += "<td>";
+        contenido += "<button onclick='abrirModal(0)' type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'><i class='glyphicon glyphicon-plus'></i></button> "
         contenido += "<button onclick='abrirModal(" + data[i].IIDCURSO + ")' data-bs-toggle='modal' data-bs-target='#myModal' class='btn btn-warning'><i class='glyphicon glyphicon-edit'></i></button> "
-        contenido += "<button class='btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"
+        contenido += "<button onclick='eliminar(" + data[i].IIDCURSO + ")' class='btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"
         contenido += "</td>";
         contenido += "</tr>";
     }
@@ -60,7 +52,6 @@ function lista(data) {
 
 var btnLimpiar = document.getElementById("btnLimpiar");
 btnLimpiar.onclick = function () {
-    var txtNombre = document.getElementById("txtNombre").value;
     document.getElementById("txtNombre").value = "";
     ObtenerCursos();
 }
@@ -95,10 +86,30 @@ function btnAceptar() {
         let form = new FormData();
         let id = document.getElementById("txtIdCurso").value;
         let nombre = document.getElementById("txtNombreCurso").value;
-        let descripcion = document.getElementById("txtDescripcionCurso");
+        let descripcion = document.getElementById("txtDescripcionCurso").value;
         form.append("IIDCURSO", id);
         form.append("NOMBRE", nombre);
         form.append("DESCRIPCION", descripcion);
+        form.append("BHABILITADO", 1);
+        if (confirm("¿Desea realmente agregar un registro?") == 1) {
+            $.ajax({
+                type: "POST",
+                url: "Curso/Guardar",
+                data: form,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data != 0) {
+                        ObtenerCursos();
+                        alert("Se guardó correctamente!");
+                        document.getElementById("btnCancelar").click();
+                    } else {
+                        alert("Ha ocurido un error.");
+                    }
+                }
+            });
+        }
+
     } else {
 
     }
@@ -116,6 +127,31 @@ function datosRequeridos() {
         }
     }
     return exito;
+
+}
+
+function eliminar(id) {
+    let form = new FormData();
+    form.append("IIDCURSO", id);
+    if (confirm("¿Desea eliminar el registro?")) {
+        $.ajax({
+            type: "POST",
+            url: "Curso/Eliminar",
+            data: form,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data != 0) {
+                    ObtenerCursos();
+                    alert("Se ha agregado el registro!");
+                    document.getElementById("btnCancelar").click();
+                } else {
+                    alert("Ocurrió un error.");
+                }
+            }
+        });
+    }
+
 
 }
 
