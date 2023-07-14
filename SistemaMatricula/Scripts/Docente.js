@@ -19,8 +19,8 @@ function LlenarComboSexo(data, control, primerElemento) {
     if (primerElemento == true) {
         contenido += "<option value=''>--Seleccione--</option>";
     }
-    var cantidadDeElemntos = data.length;
-    for (var i = 0; i < cantidadDeElemntos; i++) {
+    var cantidadDeElementos = data.length;
+    for (var i = 0; i < cantidadDeElementos; i++) {
 
         contenido += "<option value='" + data[i].IIDSEXO + "'>";
         contenido += data[i].NOMBRE;

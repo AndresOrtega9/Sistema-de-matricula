@@ -51,7 +51,6 @@ function ListaDePeriodos(data) {
         contenido += "<td>" + data[i].FECHAINICIO + "</td>";
         contenido += "<td>" + data[i].FECHAFIN + "</td>";
         contenido += "<td>";
-        contenido += "<button onclick='abrirModal(0)' type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'><i class='glyphicon glyphicon-plus'></i></button> "
         contenido += "<button onclick=abrirModal(" + data[i].IIDPERIODO + ") data-bs-toggle='modal' data-bs-target='#myModal' class='btn btn-warning'><i class='glyphicon glyphicon-edit'></i></button> "
         contenido += "<button onclick=eliminar(" + data[i].IIDPERIODO + ") class='btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"
         contenido += "</td>";
@@ -157,9 +156,8 @@ function eliminar(id) {
             processData: false,
             success: function (data) {
                 if (data != 0) {
-                    ObtenerPeriodos();
                     alert("Se ha eliminado el registro!");
-                    document.getElementById("btnCancelar");
+                    ObtenerPeriodos();        
                 } else {
                     alert("Error al elimiar el registro.");
                 }

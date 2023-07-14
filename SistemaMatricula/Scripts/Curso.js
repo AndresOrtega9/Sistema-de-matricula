@@ -33,7 +33,6 @@ function lista(data) {
         contenido += "<td>" + data[i].NOMBRE + "</td>";
         contenido += "<td>" + data[i].DESCRIPCION + "</td>";
         contenido += "<td>";
-        contenido += "<button onclick='abrirModal(0)' type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'><i class='glyphicon glyphicon-plus'></i></button> "
         contenido += "<button onclick='abrirModal(" + data[i].IIDCURSO + ")' data-bs-toggle='modal' data-bs-target='#myModal' class='btn btn-warning'><i class='glyphicon glyphicon-edit'></i></button> "
         contenido += "<button onclick='eliminar(" + data[i].IIDCURSO + ")' class='btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"
         contenido += "</td>";
@@ -133,7 +132,7 @@ function datosRequeridos() {
 function eliminar(id) {
     let form = new FormData();
     form.append("IIDCURSO", id);
-    if (confirm("¿Desea eliminar el registro?")) {
+    if (confirm("¿Desea eliminar el registro?")==1) {
         $.ajax({
             type: "POST",
             url: "Curso/Eliminar",
@@ -142,9 +141,8 @@ function eliminar(id) {
             processData: false,
             success: function (data) {
                 if (data != 0) {
+                    alert("Se ha eliminado el registro!");
                     ObtenerCursos();
-                    alert("Se ha agregado el registro!");
-                    document.getElementById("btnCancelar").click();
                 } else {
                     alert("Ocurrió un error.");
                 }

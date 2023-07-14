@@ -2,74 +2,71 @@
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Alumnos</h2>
 <hr />
 <link href="~/Content/datatables.css" rel="stylesheet" />
 <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/validacionRequired.css" rel="stylesheet" />
 <div style="margin-bottom: 10px">
     <select id="cboSexo" class="form-control" style="display: inline-block">
     </select>
-    <input type="button" name="btnBuscar" value="Buscar" id="btnBuscar" class="btn btn-success" />
+    <input type="button" name="btnBuscar" value="Buscar" onclick="BuscarPorSexo()" id="btnBuscar" class="btn btn-success" />
     <input type="button" name="btnLimpiar" value="Restablecer" id="btnLimpiar" class="btn btn-primary" />
 </div>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-    Crear
-</button>
-<div id="tablaAlumno">
+<button onclick='abrirModal(0)' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'>Crear <i class='glyphicon glyphicon-plus'></i></button>
+<div style="margin-top:20px">
+    <div id="tabla">
+    </div>
 </div>
-
 <!-- The Modal -->
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Crear nuevo registro</h4>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                <div style="display: flex; align-items: center;">
+                    <h4 class="modal-title" style="flex-grow: 1;">Crear nuevo registro</h4>
+                    <button type='button' class='btn btn-danger' data-bs-dismiss='modal'><i class='glyphicon glyphicon-remove'></i></button>
+                </div>
             </div>
-
             <!-- Modal body -->
             <div class="modal-body">
                 <table style="width:80%;margin:auto">
                     <tr>
                         <td width="40%"><label>Id Alumno</label></td>
-                        <td width="60%"><input type="text" id="txtIdAlumno" disabled/></td>
+                        <td width="60%"><input class="limpiar" type="text" id="txtIdAlumno" disabled /></td>
                     </tr>
                     <tr>
                         <td width="40%"><label>Nombre de alumno</label></td>
-                        <td width="60%"><input type="text" id="txtNombreAlumno"/></td>
+                        <td width="60%"><input class="limpiar requerido" type="text" id="txtNombreAlumno" /></td>
                     </tr>
                     <tr>
                         <td width="40%"><label>Primer apellido</label></td>
-                        <td width="60%"><input type="text" id="txtPrimerApellido"/></td>
+                        <td width="60%"><input class="limpiar requerido" type="text" id="txtPrimerApellido" /></td>
                     </tr>
                     <tr>
                         <td width="40%"><label>Segundo apellido</label></td>
-                        <td width="60%"><input type="text" id="txtSegundoApellido"/></td>
+                        <td width="60%"><input class="limpiar requerido" type="text" id="txtSegundoApellido" /></td>
                     </tr>
                     <tr>
                         <td width="40%"><label>Fecha de nacimiento</label></td>
-                        <td width="60%"><input type="text" id="datepicker"/></td>
+                        <td width="60%"><input class="limpiar requerido" type="text" id="datepicker" /></td>
                     </tr>
                     <tr>
                         <td width="40%"><label>Sexo</label></td>
-                        <td width="60%"><select id="cboSexoPopUp"></select></td>
+                        <td width="60%"><select class="limpiar requerido" id="cboSexoPopUp"></select></td>
                     </tr>
                     <tr>
                         <td width="40%"><label>Telefono del acudiente</label></td>
-                        <td><input type="number" id="txtTelefonoAcudiente"/></td>
+                        <td><input class="limpiar requerido" type="number" id="txtTelefonoAcudiente" /></td>
                     </tr>
                 </table>
             </div>
-
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button id="btnAceptar" type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
+                <button onclick="btnAceptar()" id="btnAceptar" type="button" class="btn btn-success">Aceptar</button>
                 <button id="btnCerrar" type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
             </div>
-
         </div>
     </div>
 </div>

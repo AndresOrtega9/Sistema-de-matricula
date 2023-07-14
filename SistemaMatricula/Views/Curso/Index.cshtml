@@ -8,12 +8,19 @@
 <h2>Cursos</h2>
 <hr />
 <label>Búsqueda por nombre</label>
-<input type="text" id="txtNombre" />
-<button id="btnBuscar" class="btn btn-success">Buscar</button>
-<button id="btnLimpiar" class="btn btn-primary">Restablecer</button>
-<br />
-<div id="tabla">
+<div style="margin-bottom:10px">
+    <input class="form-control" type="text" id="txtNombre" style="display:inline-block" />
+    <button id="btnBuscar" class="btn btn-success">Buscar</button>
+    <button id="btnLimpiar" class="btn btn-primary">Restablecer</button>
 </div>
+
+<button onclick='abrirModal(0)' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'>Crear <i class='glyphicon glyphicon-plus'></i></button>
+<br />
+<div style="margin-top:20px">
+    <div id="tabla">
+    </div>
+</div>
+
 <!-- The Modal -->
 <div class="modal" id="myModal">
     <div class="modal-dialog">
