@@ -7,7 +7,7 @@
 );
 $.get("Docente/LlenarComboModalidadContrato", function (data) {
     LlenarCombo(data, document.getElementById("modalidadContrato"), true)
-    LlenarCombo(data, document.getElementById("cboModalidadPopUp"),true)
+    LlenarCombo(data, document.getElementById("cboModalidadPopUp"), true)
 });
 
 $.get("Docente/ObtenerListaSexo", function (data) {
@@ -48,9 +48,9 @@ var cboTipoModalidad = document.getElementById("modalidadContrato");
 cboTipoModalidad.onchange = function () {
 
     var idModalidad = document.getElementById("modalidadContrato").value;
-    if (idModalidad == ""){
+    if (idModalidad == "") {
         ObtenerDocentes();
-    }else {
+    } else {
         $.get("Docente/FiltrarDocentePorTipoModalidad/?idModalidad=" + idModalidad, function (data) {
             ListarDocentes(data);
         });
@@ -73,7 +73,10 @@ function ListarDocentes(data) {
     contenido += "<td>NOMBRE</td>";
     contenido += "<td>PRIMER APELLIDO</td>";
     contenido += "<td>SEGUNDO APELLIDO</td>";
+    contenido += "<td>TELEFONO</td>";
+    contenido += "<td>CELULAR</td>";
     contenido += "<td>EMAIL</td>";
+    contenido += "<td>FECHA DE CONTRATO</td>";
     contenido += "<td>OPCIONES</td>";
     contenido += "</tr>";
     contenido += "</thead>";
@@ -81,14 +84,16 @@ function ListarDocentes(data) {
     contenido += "<tbody>";
     for (var i = 0; i < cantidadDeElmentos; i++) {
         contenido += "<tr>";
-        contenido += "<td>" + data[i].IIDDOCENTE + "</td>";
         contenido += "<td>" + data[i].NOMBRE + "</td>";
         contenido += "<td>" + data[i].APPATERNO + "</td>";
         contenido += "<td>" + data[i].APMATERNO + "</td>";
+        contenido += "<td>" + data[i].TELEFONOFIJO + "</td>";
+        contenido += "<td>" + data[i].TELEFONOCELULAR + "</td>";
         contenido += "<td>" + data[i].EMAIL + "</td>";
+        contenido += "<td>" + data[i].FECHACONTRATO + "</td>";
         contenido += "<td>";
-        contenido += "<button data-bs-toggle='modal' data-bs-target='#myModal' class='btn btn-warning'><i class='glyphicon glyphicon-edit'></i></button> "
-        contenido += "<button class='btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"
+        contenido += "<button onclick='abrirModal(" + data[i].IIDDOCENTE + ")' data-bs-toggle='modal' data-bs-target='#myModal' class='btn btn-warning'><i class='glyphicon glyphicon-edit'></i></button> "
+        contenido += "<button onclick='eliminar(" + data[i].IIDDOCENTE + ")' class='btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"
         contenido += "</td>";
         contenido += "</tr>";
     }
@@ -100,5 +105,135 @@ function ListarDocentes(data) {
             searching: false
         });
 };
+function abrirModal(id) {
+    let campos = document.getElementsByClassName("requerido");
+    let numeroDeCampos = campos.length;
+    for (let i = 0; i < numeroDeCampos; i++) {
+        campos[i].parentNode.classList.remove("error");
+    }
+    if (id == 0) {
+        limpiarPopUp();
+    } else {
+        $.get("Docente/RecuperarDatos?id=" + id, function (data) {
+            document.getElementById("txtIdDocente").value = data[0].IIDDOCENTE;
+            document.getElementById("txtNombreDocente").value = data[0].NOMBRE;
+            document.getElementById("txtPrimerApellido").value = data[0].APPATERNO;
+            document.getElementById("txtSegundoApellido").value = data[0].APMATERNO;
+            document.getElementById("txtDireccion").value = data[0].DIRECCION;
+            document.getElementById("txtNumeroTelefono").value = data[0].TELEFONOFIJO;
+            document.getElementById("txtNumeroCelular").value = data[0].TELEFONOCELULAR;
+            document.getElementById("txtCorreo").value = data[0].EMAIL;
+            document.getElementById("cboSexoPopUp").value = data[0].IIDSEXO;
+            document.getElementById("datepicker").value = data[0].FECHACONTRATO;
+            document.getElementById("cboModalidadPopUp").value = data[0].IIDMODALIDADCONTRATO;
+        });
+    }
+}
+function btnAceptar() {
+    if (camposRequeridos() == true) {
+        let form = new FormData();
+        let id = document.getElementById("txtIdDocente").value;
+        let nombre = document.getElementById("txtNombreDocente").value;
+        let primerApellido = document.getElementById("txtPrimerApellido").value;
+        let segundoApellido = document.getElementById("txtSegundoApellido").value;
+        let email = document.getElementById("txtCorreo").value;
+        let fechaContrato = document.getElementById("datepicker").value;
+        let numeroCelular = document.getElementById("txtNumeroCelular").value;
+        let numeroTelefono = document.getElementById("txtNumeroTelefono").value;
+        let modalidadContrato = document.getElementById("cboModalidadPopUp").value;
+        let direccion = document.getElementById("txtDireccion").value;
+        let sexo = document.getElementById("cboSexoPopUp").value;
+
+        form.append("IIDDOCENTE", id);
+        form.append("NOMBRE", nombre);
+        form.append("APPATERNO", primerApellido);
+        form.append("APMATERNO", segundoApellido);
+        form.append("EMAIL", email);
+        form.append("FECHACONTRATO", fechaContrato);
+        form.append("TELEFONOCELULAR", numeroCelular);
+        form.append("TELEFONOFIJO", numeroTelefono);
+        form.append("IIDMODALIDADCONTRATO", modalidadContrato);
+        form.append("DIRECCION", direccion);
+        form.append("IIDSEXO", sexo);
+        form.append("BHABILITADO", 1);
+        if (confirm("¿Desea guardar datos?") == 1) {
+            $.ajax({
+                type: "POST",
+                url: "Docente/Guardar",
+                data: form,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data != 0) {
+                        alert("Se ha creado el registro!");
+                        document.getElementById("btnCancelar").click();
+                        ObtenerDocentes();
+                    } else {
+                        alert("Ocurrió un error");
+                    };
+                }
+            });
+        };
+    };
+};
+function camposRequeridos() {
+    let exito = true;
+    let campo = document.getElementsByClassName("requerido");
+    let numeroDeCamposRequeridos = campo.length;
+    for (let i = 0; i < numeroDeCamposRequeridos; i++) {
+        if (campo[i].value == "") {
+            exito = false;
+            campo[i].parentNode.classList.add("error");
+        } else {
+            campo[i].parentNode.classList.remove("error");
+        }
+    }
+    return exito;
+}
+
+function limpiarPopUp() {
+    let campos = document.getElementsByClassName("limpiar");
+    let numeroDeCampos = campos.length;
+    for (let i = 0; i < numeroDeCampos; i++) {
+        campos[i].value = "";
+    }
+}
+
+function eliminar(id) {
+    let form = new FormData;
+    form.append("IIDDOCENTE",id);
+    if (confirm("¿Realmente desea eliminar el registro?") == 1) {
+        $.ajax({
+            type: "POST",
+            url: "Docente/Eliminar",
+            data: form,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data != 0) {
+                    alert("Registro eliminado!");
+                    ObtenerDocentes();
+                } else {
+                    alert("Ocurrió un error");
+                }
+            }
+        });
+    }
+}
+
+var btnFoto = document.getElementById("imagenes");
+btnFoto.onchange = function (e) {
+
+    var file = document.getElementById("imagenes").files[0];
+    var leer = new FileReader();
+    if (leer != null) {
+        leer.onloadend = function () {
+            var imagen = document.getElementById("imgFoto");
+            imagen.src = leer.result;
+        }
+    }
+    leer.readAsDataURL(file);
+
+}
 
 
