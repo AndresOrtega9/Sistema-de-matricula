@@ -70,6 +70,7 @@ function ListarDocentes(data) {
     contenido += "<table id='tabla-docente' class='table'>";
     contenido += "<thead>";
     contenido += "<tr>";
+    contenido += "<td>FOTO</td>";
     contenido += "<td>NOMBRE</td>";
     contenido += "<td>PRIMER APELLIDO</td>";
     contenido += "<td>SEGUNDO APELLIDO</td>";
@@ -83,7 +84,10 @@ function ListarDocentes(data) {
     var cantidadDeElmentos = data.length;
     contenido += "<tbody>";
     for (var i = 0; i < cantidadDeElmentos; i++) {
+        let FOTO;
+        FOTO.src = "data:image/png;base64," + data[i].FOTO
         contenido += "<tr>";
+        contenido += "<td>" +FOTO+ "</td>";
         contenido += "<td>" + data[i].NOMBRE + "</td>";
         contenido += "<td>" + data[i].APPATERNO + "</td>";
         contenido += "<td>" + data[i].APMATERNO + "</td>";
@@ -126,6 +130,7 @@ function abrirModal(id) {
             document.getElementById("cboSexoPopUp").value = data[0].IIDSEXO;
             document.getElementById("datepicker").value = data[0].FECHACONTRATO;
             document.getElementById("cboModalidadPopUp").value = data[0].IIDMODALIDADCONTRATO;
+            document.getElementById("idFoto").src = "data:image/png;base64," + data[0].FOTO;
         });
     }
 }
@@ -143,6 +148,7 @@ function btnAceptar() {
         let modalidadContrato = document.getElementById("cboModalidadPopUp").value;
         let direccion = document.getElementById("txtDireccion").value;
         let sexo = document.getElementById("cboSexoPopUp").value;
+        let foto = document.getElementById("idFoto").src.replace("data:image/png;base64,", "");
 
         form.append("IIDDOCENTE", id);
         form.append("NOMBRE", nombre);
@@ -155,6 +161,7 @@ function btnAceptar() {
         form.append("IIDMODALIDADCONTRATO", modalidadContrato);
         form.append("DIRECCION", direccion);
         form.append("IIDSEXO", sexo);
+        form.append("cadenaFoto", foto);
         form.append("BHABILITADO", 1);
         if (confirm("¿Desea guardar datos?") == 1) {
             $.ajax({
@@ -190,7 +197,6 @@ function camposRequeridos() {
     }
     return exito;
 }
-
 function limpiarPopUp() {
     let campos = document.getElementsByClassName("limpiar");
     let numeroDeCampos = campos.length;
@@ -198,10 +204,9 @@ function limpiarPopUp() {
         campos[i].value = "";
     }
 }
-
 function eliminar(id) {
     let form = new FormData;
-    form.append("IIDDOCENTE",id);
+    form.append("IIDDOCENTE", id);
     if (confirm("¿Realmente desea eliminar el registro?") == 1) {
         $.ajax({
             type: "POST",
@@ -221,19 +226,24 @@ function eliminar(id) {
     }
 }
 
-var btnFoto = document.getElementById("imagenes");
-btnFoto.onchange = function (e) {
-
-    var file = document.getElementById("imagenes").files[0];
-    var leer = new FileReader();
+let btnFoto = document.getElementById("btnFoto");
+btnFoto.onchange = function () {
+    let archivo = document.getElementById("btnFoto").files[0];
+    let leer = new FileReader();
     if (leer != null) {
         leer.onloadend = function () {
-            var imagen = document.getElementById("imgFoto");
-            imagen.src = leer.result;
+            if (archivo.type == "image/png") {
+                let foto = document.getElementById("idFoto");
+                foto.src = leer.result;
+                alert(leer.result.replace("data:image/png;base64,", ""));
+            } else {
+                alert("Seleccione un archivo de tipo .png");
+            }
+
         }
     }
-    leer.readAsDataURL(file);
-
+    leer.readAsDataURL(archivo);
 }
+
 
 

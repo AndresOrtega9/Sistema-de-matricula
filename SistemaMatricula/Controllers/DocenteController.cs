@@ -32,8 +32,9 @@ namespace SistemaMatricula.Controllers
                              docente.TELEFONOCELULAR,
                              docente.EMAIL,
                              docente.IIDSEXO,
-                             FECHACONTRATO=((DateTime)docente.FECHACONTRATO).ToShortDateString(),
-                             docente.IIDMODALIDADCONTRATO
+                             FECHACONTRATO = ((DateTime)docente.FECHACONTRATO).ToShortDateString(),
+                             docente.IIDMODALIDADCONTRATO,
+                             FOTO = Convert.ToBase64String(docente.FOTO.ToArray())
                          }).ToList();
 
             return Json(lista, JsonRequestBehavior.AllowGet);
@@ -101,12 +102,13 @@ namespace SistemaMatricula.Controllers
                             docente.EMAIL,
                             docente.IIDSEXO,
                             FECHACONTRATO=((DateTime)docente.FECHACONTRATO).ToShortDateString(),
-                            docente.IIDMODALIDADCONTRATO
+                            docente.IIDMODALIDADCONTRATO,
+                            FOTO= Convert.ToBase64String(docente.FOTO.ToArray())
                         }).ToList();
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-        public int Guardar(Docente docente)
+        public int Guardar(Docente docente, string cadenaFoto)
         {
             ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
             int numeroDeRegistrosAfectados = 0;
@@ -115,6 +117,7 @@ namespace SistemaMatricula.Controllers
             {
                 if (docente.IIDDOCENTE==0)
                 {
+                    docente.FOTO = Convert.FromBase64String(cadenaFoto);
                     db.Docente.InsertOnSubmit(docente);
                     db.SubmitChanges();
                     numeroDeRegistrosAfectados = 1;
@@ -133,6 +136,7 @@ namespace SistemaMatricula.Controllers
                     seleccionado.IIDSEXO = docente.IIDSEXO;
                     seleccionado.FECHACONTRATO = docente.FECHACONTRATO;
                     seleccionado.IIDMODALIDADCONTRATO= docente.IIDMODALIDADCONTRATO;
+                    seleccionado.FOTO = Convert.FromBase64String(cadenaFoto);
                     db.SubmitChanges();
                     numeroDeRegistrosAfectados = 1;
                 }
