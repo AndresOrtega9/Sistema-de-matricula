@@ -111,8 +111,7 @@ function btnAceptar() {
                     if (data != 0) {
                         alert("El registro se creó correctamente!");
                         ObtenerAlumnos();
-                        document.getElementById("btnCerrar").click();
-                        
+                        document.getElementById("btnCerrar").click();                       
                     } else {
                         alert("Error al crear el resgistro");
                     }

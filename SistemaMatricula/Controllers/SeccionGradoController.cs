@@ -36,7 +36,15 @@ namespace SistemaMatricula.Controllers
         public JsonResult RecuperarInformacion(int id)
         {
             ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
-            GradoSeccion gs = db.GradoSeccion.Where(g => g.IID.Equals(id)).First();
+            var gs = db.GradoSeccion.Where(g => g.IID.Equals(id))
+                .Select(g => new
+                {
+                    g.IID,
+                    g.IIDGRADO,
+                    g.IIDSECCION
+                }).ToList();
+
+
             return Json(gs, JsonRequestBehavior.AllowGet);
         }
 
@@ -54,6 +62,31 @@ namespace SistemaMatricula.Controllers
             var lista = db.Grado.Where(g => g.BHABILITADO.Equals(1))
                 .Select(g => new { g.IIDGRADO, g.NOMBRE }).ToList();
             return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+
+        public int Guardar(GradoSeccion gradoSeccion)
+        {
+            ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
+            var numeroDeRegistrosAfectados=0;
+
+            try
+            {
+                if (gradoSeccion.IID==0)
+                {
+                    db.GradoSeccion.InsertOnSubmit(gradoSeccion);
+                    db.SubmitChanges();
+                    numeroDeRegistrosAfectados = 1;
+                }
+                else
+                {
+                    
+                }
+            }catch(Exception ex)
+            {
+                numeroDeRegistrosAfectados = 0;
+            }
+
+            return numeroDeRegistrosAfectados;
         }
     }
 }
