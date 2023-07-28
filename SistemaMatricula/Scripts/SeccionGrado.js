@@ -72,7 +72,13 @@ function lista(data) {
 }
 
 function abrirModal(id) {
+    let campo = document.getElementsByClassName("requerido");
+    let numeroDeCampos = campo.length;
+    for (let i = 0; i < numeroDeCampos; i++) {
+        campo[i].parentNode.classList.remove("error");
+    }
     if (id == 0) {
+        limpiarPopUp();
     } else {
         $.get("SeccionGrado/RecuperarInformacion/?id=" + id, function (data) {
             document.getElementById("txtIdGradoSeccion").value = data[0].IID;
@@ -98,32 +104,81 @@ function datosRequeridos() {
 }
 
 function btnAceptar() {
+    if (datosRequeridos() == true) {
+        let form = new FormData();
+        let id = document.getElementById("txtIdGradoSeccion").value;
+        let cboGrado = document.getElementById("cboGrado").value;
+        let cboSeccion = document.getElementById("cboSeccion").value;
+
+        form.append("IID", id);
+        form.append("IIDGRADO", cboGrado);
+        form.append("IIDSECCION", cboSeccion);
+        form.append("BHABILITADO", 1);
+
+        if (confirm("¿Desea agregar un nuevo elemento?") == 1) {
+            $.ajax({
+                type: "POST",
+                url: "SeccionGrado/Guardar",
+                data: form,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data != 0) {
+                        alert("El registro se creó correctamente!");
+                        ObtenerSeccionGrado();
+                        document.getElementById("btnCerrar").click();
+                    } else {
+                        alert("Error al crear el resgistro");
+                    }
+                }
+            });
+        }
+    }
+};
+
+function eliminar(id) {
     let form = new FormData();
-    let id = document.getElementById("txtIdGradoSeccion").value;
-    let cboGrado = document.getElementById("cboGrado").value;
-    let cboSeccion = document.getElementById("cboSeccion").value;
-
     form.append("IID", id);
-    form.append("IIDGRADO", cboGrado);
-    form.append("IIDSECCION", cboSeccion);
-    form.append("BHABILITADO", 1);
-
-    if (confirm("¿Desea agregar un nuevo elemento?") == 1) {
+    if (confirm("¿Realmente desea eliminar este registro?") == 1) {
         $.ajax({
             type: "POST",
-            url: "SeccionGrado/Guardar",
+            url: "SeccionGrado/Eliminar",
             data: form,
-            contentType: true,
-            processData: true,
+            contentType: false,
+            processData: false,
             success: function (data) {
                 if (data != 0) {
-                    alert("Se creó el registro correctamente");
+                    alert("El registro fue eliminado!");
                     ObtenerSeccionGrado();
-                    document.getElementById("btnCerrar").click();
                 } else {
                     alert("Ocurrió un error");
                 }
             }
+
         });
     }
+}
+
+function datosRequeridos() {
+    let exito = true;
+    let campo = document.getElementsByClassName("requerido");
+    let numeroDeCampos = campo.length;
+    for (let i = 0; i < numeroDeCampos;i++) {
+        if (campo[i].value == "") {
+            exito = false;
+            campo[i].parentNode.classList.add("error");
+        } else {
+            campo[i].parentNode.classList.remove("error");
+        }
+    }
+    return exito;
+}
+
+function limpiarPopUp() {
+    let campo = document.getElementsByClassName("limpiar");
+    let numeroDeCampos = campo.length;
+    for (let i = 0; i < numeroDeCampos; i++) {
+        campo[i].value = "";
+    }
+
 }

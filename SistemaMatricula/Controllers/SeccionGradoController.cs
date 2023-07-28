@@ -23,11 +23,12 @@ namespace SistemaMatricula.Controllers
                          on gsec.IIDSECCION equals sec.IIDSECCION
                          join grad in db.Grado
                          on gsec.IIDGRADO equals grad.IIDGRADO
+                         where gsec.BHABILITADO.Equals(1)
                          select new
                          {
                              gsec.IID,
-                             NOMBRESECCION=sec.NOMBRE,
-                             NOMBREGRADO=grad.NOMBRE,
+                             NOMBRESECCION = sec.NOMBRE,
+                             NOMBREGRADO = grad.NOMBRE,
                          }).ToList();
 
             return Json(lista, JsonRequestBehavior.AllowGet);
@@ -43,8 +44,6 @@ namespace SistemaMatricula.Controllers
                     g.IIDGRADO,
                     g.IIDSECCION
                 }).ToList();
-
-
             return Json(gs, JsonRequestBehavior.AllowGet);
         }
 
@@ -79,13 +78,36 @@ namespace SistemaMatricula.Controllers
                 }
                 else
                 {
-                    
+                    GradoSeccion seleccionado = db.GradoSeccion.Where(g => g.IID.Equals(gradoSeccion.IID)).First();
+                    seleccionado.IIDGRADO = gradoSeccion.IIDGRADO;
+                    seleccionado.IIDSECCION = gradoSeccion.IIDSECCION;
+                    db.SubmitChanges();
+                    numeroDeRegistrosAfectados = 1;
                 }
             }catch(Exception ex)
             {
                 numeroDeRegistrosAfectados = 0;
             }
 
+            return numeroDeRegistrosAfectados;
+        }
+
+        public int Eliminar(GradoSeccion gradoSeccion)
+        {
+            ModeloDeDatosDataContext db = new ModeloDeDatosDataContext();
+            var numeroDeRegistrosAfectados = 0;
+
+            try
+            {
+                var seleccionado = db.GradoSeccion.Where(gs => gs.IID.Equals(gradoSeccion.IID)).First();
+                seleccionado.BHABILITADO = gradoSeccion.BHABILITADO = 0;
+                db.SubmitChanges();
+                numeroDeRegistrosAfectados = 1;
+
+            }catch(Exception ex)
+            {
+                numeroDeRegistrosAfectados = 0;
+            }
             return numeroDeRegistrosAfectados;
         }
     }
